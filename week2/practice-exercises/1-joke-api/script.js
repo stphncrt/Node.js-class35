@@ -9,9 +9,24 @@
  * - To install node dependencies you should first initialize npm
  * - Print the entire response to the console to see how it is structured.
  */
+import express from 'express';
+import fetch from 'node-fetch';
+const PORT = 3000;
+const url = 'http://api.icndb.com/jokes/random?firstName=John&lastName=Doe';
+const url2 = 'http://api.icndb.com/jokes/random/10';
 
 function printChuckNorrisJoke() {
-  // YOUR CODE GOES IN HERE
+    const app = express();
+
+    app.get('/', async(req, res) => {
+        const response = await fetch(url)
+        const joke = await response.json();
+        res.json(joke);
+    })
+
+    app.listen(PORT, () => {
+        console.log(`server initiated on ${PORT}`);
+    })
 
 }
 
